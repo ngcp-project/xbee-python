@@ -1,16 +1,17 @@
 import queue
 import re   # Used to parse AT command lines from the config file
-import serial   # Pyserial, used to cimmunicate over serial ports
+import serial_io   # Pyserial, used to cimmunicate over serial ports
 import threading
 import time     # Used for timeouts, sleep, and measuring performance
 
-from Communication.interfaces.Serial import Serial  # Custom interface/base class for serial communication
-from Communication.XBee.Frames import x81, x88, x89 # Frame parser for classes for each Xbee frame type
-from Logger.Logger import Logger    # Custom logging class
+# from Communication.interfaces.Serial import Serial  # Custom interface/base class for serial communication
+from serial_io import serial_io
+from .Frames import x81, x88, x89 # Frame parser for classes for each Xbee frame type
+from logger import logger    # Custom logging class
 
-class XBee(Serial):
+class XBee(serial_io):
     # Configure serial port
-    def __init__(self, port: str = None, baudrate: int = 115200, status: bool = False, logger: Logger = None, config_file: str = None):
+    def __init__(self, port: str = None, baudrate: int = 115200, status: bool = False, logger: logger = None, config_file: str = None):
         """Initialize serial connection
 
         Args:
@@ -25,7 +26,7 @@ class XBee(Serial):
         self.status = status     # If True, it will try to read back status frames (0x89)
         
         if logger is None:  
-            self.logger = Logger()   # Create logger if not provided
+            self.logger = logger()   # Create logger if not provided
             self.logger.write("LOGGER CREATED By XBee.py")
         else:
             self.logger = logger
@@ -82,7 +83,7 @@ class XBee(Serial):
             return False
         
         try:
-            self.ser = serial.Serial(self.port, self.baudrate, timeout=0) # Open the serial port
+            self.ser = serial.serial(self.port, self.baudrate, timeout=0) # Open the serial port
             self.logger.write("Serial port opened.")
             self.logger.write("Clearing input and output buffers.")
 
