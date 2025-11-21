@@ -1,7 +1,7 @@
-from serial_io import serial_io
+from serial_io import ISerial
 from xbee import XBee
 
-class XBeeTester(serial_io):
+class XBeeTester(ISerial):
 
     def __init__(self):
         pass
@@ -31,7 +31,7 @@ class XBeeTester(serial_io):
         Returns:
           True if success, False if failure.
         """
-        pass
+        return "Transmitting", data
 
     def retrieve_data(self):
         """Read incomming data.

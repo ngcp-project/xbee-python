@@ -1,15 +1,15 @@
 import queue
 import re   # Used to parse AT command lines from the config file
-import serial_io   # Pyserial, used to cimmunicate over serial ports
+import serial   # Pyserial, used to cimmunicate over serial ports
 import threading
 import time     # Used for timeouts, sleep, and measuring performance
 
 # from Communication.interfaces.Serial import Serial  # Custom interface/base class for serial communication
-from serial_io import serial_io
-from .Frames import x81, x88, x89 # Frame parser for classes for each Xbee frame type
+from serial_io import ISerial
+from frames import x81, x88, x89 # Frame parser for classes for each Xbee frame type
 from logger import logger    # Custom logging class
 
-class XBee(serial_io):
+class XBee(ISerial):
     # Configure serial port
     def __init__(self, port: str = None, baudrate: int = 115200, status: bool = False, logger: logger = None, config_file: str = None):
         """Initialize serial connection

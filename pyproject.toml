@@ -7,10 +7,14 @@ name = "xbee-python"
 version = "2.0.0a"
 description = "XBee serial communication library"
 requires-python = ">=3.8"
-authors = [{ name = "Joshua Ho" }]
+authors = [
+    { name = "Joshua Ho" },
+    { name = "Olena Molla" }
+]
 dependencies = [
   "serial-io>=0.1.0a",
-  "xbee-logger>=0.1.0a"
+  "logger>=0.1.0a",
+  "pyserial==3.5"
 ]
 
 [tool.setuptools.packages.find]
