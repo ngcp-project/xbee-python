@@ -1,0 +1,6 @@
+[submodule "lib/serial-io"]
+	path = lib/serial-io
+	url = https://github.com/ngcp-project/serial-io.git
+[submodule "lib/logger"]
+	path = lib/logger
+	url = https://github.com/ngcp-project/logger.git
