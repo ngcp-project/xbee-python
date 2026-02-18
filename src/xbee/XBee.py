@@ -6,12 +6,12 @@ import time     # Used for timeouts, sleep, and measuring performance
 
 # from Communication.interfaces.Serial import Serial  # Custom interface/base class for serial communication
 from serial_io import ISerial
-from frames import x81, x88, x89 # Frame parser for classes for each Xbee frame type
-from logger import logger    # Custom logging class
+from xbee.frames import x81, x88, x89 # Frame parser for classes for each Xbee frame type
+from logger import Logger    # Custom logging class
 
 class XBee(ISerial):
     # Configure serial port
-    def __init__(self, port: str = None, baudrate: int = 115200, status: bool = False, logger: logger = None, config_file: str = None):
+    def __init__(self, port: str = None, baudrate: int = 115200, status: bool = False, logger: Logger = None, config_file: str = None):
         """Initialize serial connection
 
         Args:
@@ -26,7 +26,7 @@ class XBee(ISerial):
         self.status = status     # If True, it will try to read back status frames (0x89)
         
         if logger is None:  
-            self.logger = logger()   # Create logger if not provided
+            self.logger = Logger()   # Create logger if not provided
             self.logger.write("LOGGER CREATED By XBee.py")
         else:
             self.logger = logger
@@ -50,7 +50,7 @@ class XBee(ISerial):
         self.logger.write(f"port: {self.port}, baudrate: {self.baudrate}, timeout: {self.timeout}, config_file: {self.config_file}")    # Log configuration for debugging
     
 
-    def open(self):
+    def open (self):
         """Opens the serial port.
 
         Returns:
@@ -435,7 +435,7 @@ class XBee(ISerial):
           frame_data: Received bytes (between length and checksum fields)
 
         Returns:
-          xxxxDecoded message & Received Signal Strength Indicator (RSSI), None if there is an error decoding message
+          Decoded message & Received Signal Strength Indicator (RSSI), None if there is an error decoding message
           Returns 0x81 class (frame_type, frame_id, payload, rssi, ...)
         """
         frame_type = frame_data[0]
