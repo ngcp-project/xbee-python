@@ -6,7 +6,7 @@ import time     # Used for timeouts, sleep, and measuring performance
 
 # from Communication.interfaces.Serial import Serial  # Custom interface/base class for serial communication
 from serial_io import ISerial
-from frames import x81, x88, x89 # Frame parser for classes for each Xbee frame type
+from xbee.frames import x81, x88, x89 # Frame parser for classes for each Xbee frame type
 from logger import Logger    # Custom logging class
 
 class XBee(ISerial):
@@ -435,7 +435,7 @@ class XBee(ISerial):
           frame_data: Received bytes (between length and checksum fields)
 
         Returns:
-          xxxxDecoded message & Received Signal Strength Indicator (RSSI), None if there is an error decoding message
+          Decoded message & Received Signal Strength Indicator (RSSI), None if there is an error decoding message
           Returns 0x81 class (frame_type, frame_id, payload, rssi, ...)
         """
         frame_type = frame_data[0]

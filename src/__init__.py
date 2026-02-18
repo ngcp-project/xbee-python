@@ -1,7 +1,8 @@
-from .frames import *
-from .xbee import XBee, XBeeTester
+from .xbee import frames
+from .xbee.frames import *
+from .xbee import XBee, XBeeEmulator
 
 
 __all__ = []
 __all__ += frames.__all__
-__all__ += ["XBee", "XBeeTester"]
+__all__ += ["XBee", "XBeeEmulator"]

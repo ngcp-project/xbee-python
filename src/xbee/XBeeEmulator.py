@@ -1,10 +1,10 @@
 import queue
 from serial_io import ISerial
 from xbee import XBee
-from frames import x81, x88, x89 # Frame parser for classes for each Xbee frame type
+from xbee.frames import x81, x88, x89 # Frame parser for classes for each Xbee frame type
 from logger import Logger    # Custom logging class
 
-class XBeeSimulation(ISerial):
+class XBeeEmulator(ISerial):
 
     def __init__(self, port: str = None, baudrate: int = 115200, status: bool = False, logger: Logger = None, config_file: str = None):
         """Initialize serial connection
@@ -22,9 +22,9 @@ class XBeeSimulation(ISerial):
         
         if logger is None:  
             self.logger = Logger()   # Create logger if not provided
-            self.logger.write("LOGGER CREATED By XBeeTester.py")
+            self.logger.write("LOGGER CREATED By XBeeEmulator.py")
         else:
-            self.logger.write("XBeeTester")
+            self.logger.write("XBeeEmulator")
             self.logger = logger
         self.timeout = 0.1 # Allow programmer to configure timeout? # Max time to wait for responses
         self.status_timeout = 0.2

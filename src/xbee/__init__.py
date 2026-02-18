@@ -1,6 +1,6 @@
 from .XBee import XBee
-from .XBeeSimulation import XBeeSimulation
+from .XBeeEmulator import XBeeEmulator
 
 
 __all__ = []
-__all__ += ["XBee", "XBeeSimulation"]
+__all__ += ["XBee", "XBeeEmulator"]
