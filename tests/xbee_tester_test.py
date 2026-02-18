@@ -1,5 +1,11 @@
-from xbee import XBeeTester
+from xbee import XBeeEmulator as XBee
 
-device = XBeeTester()
+device = XBee()
 
-print(device.transmit_data("Test"))
+device.close()
+
+device.open()
+
+device.open()
+
+device.close()
