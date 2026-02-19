@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xbee-python"
-version = "2.0.0a"
+version = "2.0.1a"
 description = "XBee serial communication library"
 requires-python = ">=3.8"
 authors = [

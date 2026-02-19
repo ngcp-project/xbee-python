@@ -4,13 +4,14 @@ from xbee import XBeeEmulator as XBee
 PORT = "/dev/cu.usbserial-D30DWZKY"
 # PORT = "/dev/cu.usbserial-D30DWZL4"
 BAUD_RATE = 115200
+MAC_ADDRESS = "0013A2004243672F"
 DESTINATION = "0013A20042435EA9"
 # 00 13 A2 00 42 43 5E A9
 def main():
     print("XBEE SERIAL TRANSMIT TEST")
     print("===============================")
     # Initialize XBee object
-    xbee = XBee(PORT, BAUD_RATE)
+    xbee = XBee(PORT, BAUD_RATE, mac_address=MAC_ADDRESS)
         # Open serial connection
     try:
         xbee.open()
