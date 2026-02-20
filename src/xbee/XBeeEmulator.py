@@ -133,6 +133,10 @@ class XBeeEmulator(XBee):
         try:
             _broadcast, _frame_id, src64_bytes, rf_payload = _parse_envelope(payload)
 
+            # Ignore broadcasts from self
+            if src64_bytes.hex().upper() == self.mac_address.upper():
+                return
+
             source_address = src64_bytes[-2:]
 
             rssi = -40
