@@ -30,6 +30,8 @@ pip install -r requirements.txt
 
 See the [XBee Serial API][api] page for method details.
 
+See the [Xbee Emulator][xbee_emulator] page if you would like to use the `XBeeEmulator` module.
+
 See the [Examples][examples] page for example implementations of the XBee Serial Library.
 
 
@@ -48,3 +50,4 @@ Any questions? Feel free to @ GCS Infrastructure on Discord.
 [examples]: ./docs/examples.md
 [frame_details]: ./docs/frame_details.md
 [serial_port]: ./docs/serial_port.md
+[xbee_emulator]: ./docs/xbee_emulator.md
