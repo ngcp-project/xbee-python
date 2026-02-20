@@ -4,8 +4,8 @@ from xbee import XBeeEmulator as XBee
 PORT = "/dev/cu.usbserial-D30DWZKY"
 # PORT = "/dev/cu.usbserial-D30DWZL4"
 BAUD_RATE = 115200
-MAC_ADDRESS = "0013A2004243672F"
-DESTINATION = "0013A20042435EA9"
+MAC_ADDRESS = "0013A20042435EA9"
+DESTINATION = "0013A2004243672F"
 # 00 13 A2 00 42 43 5E A9
 def main():
     print("XBEE SERIAL TRANSMIT TEST")
@@ -27,7 +27,7 @@ def main():
             print("Data sent")
             data = xbee.retrieve_data()
             if data:
-                print("Retrieved data:", data)
+                print("Retrieved data:", data.data)
         
         except Exception as e:
             print(f"Error: {e}")
