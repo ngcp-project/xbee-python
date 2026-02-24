@@ -12,8 +12,11 @@ This library allows for the communication between a computer and a XBee RF modul
 ## Getting Started
 Clone the XBee-Python GitHub repository
 ```sh
-git clone --recurse-submodules https://github.com/your-org/xbee.git
-# If you forget --recurse-submodules: git submodule update --init --recursive
+git clone --recurse-submodules https://github.com/ngcp-project/xbee-python.git
+
+# If you forget --recurse-submodules and you already cloned the library: 
+# In ./xbee-python
+git submodule update --init --recursive
 ```
 
 > [!Note]
