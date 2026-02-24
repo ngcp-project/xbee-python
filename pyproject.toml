@@ -12,9 +12,9 @@ authors = [
     { name = "Olena Molla" }
 ]
 dependencies = [
-  "serial-io>=0.1.0a",
-  "logger>=0.1.0a",
   "pyserial==3.5",
+  "serial-io @ git+https://github.com/ngcp-project/serial-io.git@849bbe5",
+  "logger @ git+https://github.com/ngcp-project/logger.git@3f0a41e",
   "paho-mqtt==2.1.0",
   "python-dotenv==1.2.1"
 ]

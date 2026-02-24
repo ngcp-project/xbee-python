@@ -28,7 +28,7 @@ git submodule update --init --recursive
 
 Install dependencies
 ```py
-pip install -r requirements.txt
+pip install -e /path/to/xbee-python
 ```
 
 See the [XBee Serial API][api] page for method details.
