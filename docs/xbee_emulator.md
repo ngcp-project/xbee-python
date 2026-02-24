@@ -20,7 +20,7 @@ Navigate to the xbee library and create a `.env` file at the following directory
 ```
 
 > [!NOTE]
-> If you installed the `xbee-python` library without using the `-e` option, you may need to place the `.env` file in the same directory as your script.
+> If you installed the `xbee-python` library without using the `-e` option, you may need to place the `.env` file in your root directory.
 
 The `.env` file should have the following fields. Set host to the mqtt broker address. You can host a broker yourself, or contact GCS Infrastructure for the broker address:
 ```env

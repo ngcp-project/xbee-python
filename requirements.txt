@@ -1,3 +1,0 @@
--e lib/serial-io
--e lib/logger
--e . # Installs dependencies from pyproject.toml
