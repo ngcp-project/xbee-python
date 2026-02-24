@@ -5,11 +5,6 @@ from xbee.utils import MqttClient, FakeSerial
 from xbee.frames import x81, x89
 from logger import Logger
 
-load_dotenv()
-HOST = os.getenv("host")
-PORT = int(os.getenv("port"))
-KEEPALIVE = int(os.getenv("keepalive"))
-
 # Binary helpers
 
 def _mac64_hex_to_bytes(mac: str) -> bytes:
@@ -48,14 +43,22 @@ def _parse_envelope(packet: bytes):
 
 class XBeeEmulator(XBee):
     def __init__(self, *args, logger: Logger = None, pan_id: int = 3332, mac_address: str = "", **kwargs):
+
+        load_dotenv()
+        try:
+            self.host = os.getenv("host")
+            self.mqtt_port = int(os.getenv("port"))
+            self.keepalive = int(os.getenv("keepalive"))
+        except KeyError:
+            raise RuntimeError("XBeeEmulator requires a .env file, see https://github.com/ngcp-project/xbee-python/blob/main/docs/xbee_emulator.md")
+
         self.pan_id = pan_id
         self.mac_address = (mac_address or "").upper()
 
         self.logger = logger or Logger()
+
         super().__init__(*args, logger=self.logger, pan_id=pan_id, mac_address=mac_address, **kwargs)
-
         self.client = MqttClient(str(pan_id), self.mac_address, on_rf=self._on_mqtt, use_tls=True)
-
         self.client.set_username_pw(self.mac_address, self.mac_address)
 
         self._running = False
@@ -65,7 +68,7 @@ class XBeeEmulator(XBee):
             self.logger.write(f"Already open. ser={self.ser}")
             return False
 
-        self.client.connect(HOST, PORT, KEEPALIVE)
+        self.client.connect(self.host, self.mqtt_port, self.keepalive)
         self.client.subscribe_rf()
 
         self.ser = FakeSerial(logger=self.logger)

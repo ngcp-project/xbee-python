@@ -13,11 +13,14 @@ In the script where you are importing the XBee library, import the `XBeeEmulator
 from xbee import XbeeEmulator as XBee
 ```
 
-Navigate to the xbee library and create a .env file at the following directory:
+Navigate to the xbee library and create a `.env` file at the following directory:
 
 ```bash
 ./xbee-python/src/xbee/
 ```
+
+> [!NOTE]
+> If you installed the `xbee-python` library without using the `-e` option, you may need to place the `.env` file in the same directory as your script.
 
 The `.env` file should have the following fields. Set host to the mqtt broker address. You can host a broker yourself, or contact GCS Infrastructure for the broker address:
 ```env
