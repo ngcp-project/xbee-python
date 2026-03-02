@@ -6,7 +6,7 @@ import time     # Used for timeouts, sleep, and measuring performance
 
 # from Communication.interfaces.Serial import Serial  # Custom interface/base class for serial communication
 from serial_io import ISerial
-from xbee.frames import x81, x88, x89 # Frame parser for classes for each Xbee frame type
+from xbee.frames import x81, x88, x89, x90 # Frame parser for classes for each Xbee frame type
 from logger import Logger    # Custom logging class
 
 class XBee(ISerial):
@@ -40,6 +40,7 @@ class XBee(ISerial):
         self.x81_queue: queue.Queue = queue.Queue()
         self.x88_queue: queue.Queue = queue.Queue() # If working properly, this queue should never have more than 1 element
         self.x89_queue: queue.Queue = queue.Queue()
+        self.x90_queue: queue.Queue = queue.Queue()
 
         # Transmit Queue
         self.transmit_queue: queue.Queue = queue.Queue()
@@ -256,6 +257,7 @@ class XBee(ISerial):
         # 8) Now parse the frame
         #    The first byte of frame_data is the frame_type
         frame_type = frame_data[0]
+
         if frame_type == 0x81:
             self.logger.write("Adding frame to 0x81 (Rx Packet) queue")
             frame: x81 = self._0x81(frame_data)
@@ -271,6 +273,12 @@ class XBee(ISerial):
         elif frame_type == 0x89:
             self.logger.write("Adding frame to 0x89 (Tx Status) queue")
             frame: x89 = self._0x89(frame_data)
+            self.x89_queue.put(frame)
+            return frame
+        
+        elif frame_type == 0x90:
+            self.logger.write("Adding frame to 0x90 (Tx Status) queue")
+            frame: x90 = self.__0x90(frame_data)
             self.x89_queue.put(frame)
             return frame
         
@@ -501,6 +509,26 @@ class XBee(ISerial):
         frame_id = frame_data[1]
         delivery_status = frame_data[2]
         frame: x89 = x89(frame_type, frame_id, delivery_status)
+
+        self.logger.write(f"[Transmit status] Frame Type: {frame.frame_type}, Frame ID: {frame.frame_id}, Status: {frame.status}")
+        return frame
+    
+    def __0x90(self, frame_data) -> x90:
+        """Handle XBee Frame Type 89 (Transmit Status)
+
+        Args:
+          frame_data: Received bytes (between length and checksum fields)
+
+        Returns:
+          Returns 0x89 class (frame_type, frame_id, delivery_status)
+        """
+        frame_type = frame_data[0]
+        address_64 = frame_data[1:9]
+        address_16 = frame_data[9:11]
+        receive_options = frame_data[11]
+        received_data = frame_data[12:]
+        
+        frame: x90 = x90(frame_type, address_64, address_16, receive_options, received_data)
 
         self.logger.write(f"[Transmit status] Frame Type: {frame.frame_type}, Frame ID: {frame.frame_id}, Status: {frame.status}")
         return frame
