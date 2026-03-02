@@ -274,6 +274,12 @@ class XBee(ISerial):
             self.x89_queue.put(frame)
             return frame
         
+        elif frame_type == 0x90:
+            self.logger.write("Adding frame to 0x89 (Tx Status) queue")
+            frame: x90 = self.__0x90(frame_data)
+            self.x89_queue.put(frame)
+            return frame
+        
         else:
             # For all other frame types, just ignore or print a debug
             self.logger.write(f"Pass. Unhandled frame type: {frame_data}", self.logger.ERROR)
