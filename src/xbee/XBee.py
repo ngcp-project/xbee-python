@@ -276,8 +276,8 @@ class XBee(ISerial):
             return frame
         
         elif frame_type == 0x90:
-            self.logger.write("Adding frame to 0x89 (Tx Status) queue")
-            frame: x90 = self.__0x90(frame_data)
+            self.logger.write("Adding frame to 0x90 (Tx Status) queue")
+            frame: x90 = self._0x90(frame_data)
             self.x90_queue.put(frame)
             return frame
         
@@ -508,6 +508,25 @@ class XBee(ISerial):
         frame_id = frame_data[1]
         delivery_status = frame_data[2]
         frame: x89 = x89(frame_type, frame_id, delivery_status)
+
+        self.logger.write(f"[Transmit status] Frame Type: {frame.frame_type}, Frame ID: {frame.frame_id}, Status: {frame.status}")
+        return frame
+    
+    def _0x90(self, frame_data) -> x90:
+        """Handle XBee Frame Type 90 (Transmit Status)
+
+        Args:
+          frame_data: Received bytes (between length and checksum fields)
+
+        Returns:
+          Returns 0x90 class (frame_type, frame_id, delivery_status)
+        """
+        frame_type = frame_data[0]
+        address_64 = frame_data[1:9]
+        address_16 = frame_data[9:11]
+        receive_options = frame_data[11]
+        received_data = frame_data[12:]
+        frame: x90 = x90(frame_type, address_64, address_16, receive_options, received_data)
 
         self.logger.write(f"[Transmit status] Frame Type: {frame.frame_type}, Frame ID: {frame.frame_id}, Status: {frame.status}")
         return frame
