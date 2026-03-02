@@ -528,7 +528,7 @@ class XBee(ISerial):
         received_data = frame_data[12:]
         frame: x90 = x90(frame_type, address_64, address_16, receive_options, received_data)
 
-        self.logger.write(f"[Transmit status] Frame Type: {frame.frame_type}, Frame ID: {frame.frame_id}, Status: {frame.status}")
+        self.logger.write(f"[Transmit status] Frame Type: {frame.frame_type}, Received Data: {received_data}")
         return frame
     
     def read_config(self, filename):
