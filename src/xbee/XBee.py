@@ -1,6 +1,5 @@
 import queue
 import re   # Used to parse AT command lines from the config file
-import serial   # Pyserial, used to cimmunicate over serial ports
 import threading
 import time     # Used for timeouts, sleep, and measuring performance
 
@@ -527,7 +526,7 @@ class XBee(ISerial):
         address_16 = frame_data[9:11]
         receive_options = frame_data[11]
         received_data = frame_data[12:]
-        
+
         frame: x90 = x90(frame_type, address_64, address_16, receive_options, received_data)
 
         self.logger.write(f"[Transmit status] Frame Type: {frame.frame_type}, Frame ID: {frame.frame_id}, Status: {frame.status}")
