@@ -2,12 +2,13 @@ import threading
 # from  multiprocessing import Process
 # from pynput import keyboard
 
-from xbee import XBeeEmulator as XBee
+from xbee import XBee
 
-PORT = "/dev/cu.usbserial-D30DWZL4" # Replace with your actual serial port. Plug in module and run "ls -l /dev/cu.usb*"
+#PORT = "/dev/cu.usbserial-D30DWZL4" # Replace with your actual serial port. Plug in module and run "ls -l /dev/cu.usb*"
+PORT = "COM4"
 BAUD_RATE = 115200
-MAC_ADDRESS = "0013A2004243672F"
-DESTINATION = "0013A20042435EA9"
+MAC_ADDRESS = "0013A2004283A0EC"
+DESTINATION = "0013A200428396C0"
 
 transmit = False
 transmit_lock = threading.Lock()
