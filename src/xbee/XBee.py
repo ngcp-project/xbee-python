@@ -287,7 +287,7 @@ class XBee(ISerial):
             print(f"Got frame type: 0x{frame_type:02X}, ignoring.")
             return None
 
-    def retrieve_data(self) -> x81:
+    def retrieve_data(self) -> x81 | x90:
         """
         Retrieves one frame of data (0x81 - Rx Packet)
 
@@ -297,7 +297,7 @@ class XBee(ISerial):
         """
 
         try:
-            data = self.x81_queue.get(True, self.timeout)
+            data = self.x90_queue.get(True, self.timeout)
         except:
             return None
         else:
