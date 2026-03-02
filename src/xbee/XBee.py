@@ -6,7 +6,7 @@ import time     # Used for timeouts, sleep, and measuring performance
 
 # from Communication.interfaces.Serial import Serial  # Custom interface/base class for serial communication
 from serial_io import ISerial
-from xbee.frames import x81, x88, x89 # Frame parser for classes for each Xbee frame type
+from xbee.frames import x81, x88, x89, x90 # Frame parser for classes for each Xbee frame type
 from logger import Logger    # Custom logging class
 
 class XBee(ISerial):
@@ -40,6 +40,7 @@ class XBee(ISerial):
         self.x81_queue: queue.Queue = queue.Queue()
         self.x88_queue: queue.Queue = queue.Queue() # If working properly, this queue should never have more than 1 element
         self.x89_queue: queue.Queue = queue.Queue()
+        self.x90_queue: queue.Queue = queue.Queue()
 
         # Transmit Queue
         self.transmit_queue: queue.Queue = queue.Queue()
@@ -277,7 +278,7 @@ class XBee(ISerial):
         elif frame_type == 0x90:
             self.logger.write("Adding frame to 0x89 (Tx Status) queue")
             frame: x90 = self.__0x90(frame_data)
-            self.x89_queue.put(frame)
+            self.x90_queue.put(frame)
             return frame
         
         else:
