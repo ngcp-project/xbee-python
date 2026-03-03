@@ -37,10 +37,9 @@ class XBee(ISerial):
         self.config_file = config_file # Add AT_Config.py file  # Path to config file with AT commands 
 
         # Retrieve Queues
-        self.x81_queue: queue.Queue = queue.Queue()
+        self.x81x90_queue: queue.Queue = queue.Queue()
         self.x88_queue: queue.Queue = queue.Queue() # If working properly, this queue should never have more than 1 element
         self.x89_queue: queue.Queue = queue.Queue()
-        self.x90_queue: queue.Queue = queue.Queue()
 
         # Transmit Queue
         self.transmit_queue: queue.Queue = queue.Queue()
@@ -260,7 +259,7 @@ class XBee(ISerial):
         if frame_type == 0x81:
             self.logger.write("Adding frame to 0x81 (Rx Packet) queue")
             frame: x81 = self._0x81(frame_data)
-            self.x81_queue.put(frame)
+            self.x81x90_queue.put(frame)
             return frame
         
         elif frame_type == 0x88:
@@ -278,7 +277,7 @@ class XBee(ISerial):
         elif frame_type == 0x90:
             self.logger.write("Adding frame to 0x90 (Tx Status) queue")
             frame: x90 = self._0x90(frame_data)
-            self.x90_queue.put(frame)
+            self.x81x90_queue.put(frame)
             return frame
         
         else:
@@ -297,7 +296,7 @@ class XBee(ISerial):
         """
 
         try:
-            data = self.x90_queue.get(True, self.timeout)
+            data = self.x81x90_queue.get(True, self.timeout)
         except:
             return None
         else:
