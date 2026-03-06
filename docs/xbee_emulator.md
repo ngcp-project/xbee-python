@@ -27,6 +27,7 @@ The `.env` file should have the following fields. Set host to the mqtt broker ad
 host= #MQTT HOST ADDRESS
 port=8883
 keepalive=60
+receivepacket = 8
 ```
 
 ## Limitations
