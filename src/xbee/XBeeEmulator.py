@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from xbee import XBee
 from xbee.utils import MqttClient, FakeSerial
-from xbee.frames import x81, x89
+from xbee.frames import x81, x89, x90
 from logger import Logger
 
 # Binary helpers
@@ -131,7 +131,7 @@ class XBeeEmulator(XBee):
 
     def _on_mqtt(self, topic: str, payload: bytes):
         """
-        Convert MQTT payload -> x81 -> enqueue into the same queue XBee.retrieve_data() uses.
+        Convert MQTT payload -> x81 OR x90 -> enqueue into the same queue XBee.retrieve_data() uses.
         """
         try:
             _broadcast, _frame_id, src64_bytes, rf_payload = _parse_envelope(payload)
@@ -150,8 +150,16 @@ class XBeeEmulator(XBee):
             except UnicodeDecodeError:
                 decoded = rf_payload.decode("latin1")
 
-            frame = x81(0x81, source_address, rssi, options, decoded)
-            self.x81_queue.put(frame)
+            receive_packet_type = os.getenv("receivepacket")
+            frame = None
+            if receive_packet_type == "81":
+                frame = x81(0x81, source_address, rssi, options, decoded)
+
+            elif receive_packet_type == "90":
+                frame = x90(0x90, source_address, "0000", options, decoded)
+            else:
+                print("Error: Unknown receive packet type. Please use x81 or x90. Please add the relevant receive packet type to the .env file")
+            self.x81x90_queue.put(frame)
 
         except Exception as e:
             self.logger.write(f"MQTT RX parse failed: {e}", self.logger.ERROR)

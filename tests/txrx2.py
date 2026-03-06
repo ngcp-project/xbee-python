@@ -2,7 +2,9 @@ import threading
 # from  multiprocessing import Process
 # from pynput import keyboard
 
-from xbee import XBee
+from xbee import XBeeEmulator as XBee
+
+from xbee.frames import x81, x90
 
 #PORT = "/dev/cu.usbserial-D30DWZL4" # Replace with your actual serial port. Plug in module and run "ls -l /dev/cu.usb*"
 PORT = "COM3"
@@ -26,7 +28,12 @@ def manage_serial(xbee:XBee):
                 # with transmit_lock:
                 transmit = False
             if data:
-                print("Retrieved data:", data.data)
+                if isinstance(data, x81):
+                    print("Retrieved data:", data.data)
+                elif isinstance(data, x90):
+                    print("Received data:", data.received_data)
+                else:
+                    print(data)
             
     except Exception as e:
         print(f"Error: {e}")
