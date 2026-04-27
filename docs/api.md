@@ -3,7 +3,7 @@
 
 
 > ```py
-> __init__(port=None, baudrate=115200, status=False, logger=None)
+> __init__(port=None, baudrate=115200, status=False, pan_id: int = 3332, mac_address: str = "" logger=None, config_file: str = None)
 >```
 
 Configure the serial port
@@ -15,7 +15,14 @@ Configure the serial port
 
 | <!-- --> | <!-- --> |
 | - | - |
-| **Parameters** | <ul><li>**port** (`str` or `None`) - Port of serial device.</li><li>**baudrate** (`int`) - Baudrate of serial device.</li><li>**status** (`bool`) - Automatically receive status packets after a transmission.</li><li>**logger** (`Logger`) - Logger object from Logger.Logger used to record data such as sent and received data.</li></ul> |
+| **Parameters** | 
+<ul>
+  <li><strong>port</strong> (<code>str</code> or <code>None</code>) - Port of serial device.</li>
+  <li><strong>baudrate</strong> (<code>int</code>) - Baudrate of serial device.</li>
+  <li><strong>status</strong> (<code>bool</code>) - Automatically receive status packets after a transmission.</li>
+  <li><strong>logger</strong> (<code>Logger</code>) - Logger object from Logger.Logger used to record data such as sent and received data.</li>
+</ul>
+|
 
 <br>
 
