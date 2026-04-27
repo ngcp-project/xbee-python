@@ -18,7 +18,10 @@ class XBee(ISerial):
           port: Port of serial device.
           baudrate: Baudrate of serial device (/port)
           status: Automatically receive status packets after a transmission.
+          pan_id: Not used. Included to provide support for XbeeEmulator
+          mac_address Not used. Included to provide support for XbeeEmulator
           logger: Logger instance
+          config_file: Filename of file that contains configuration details to read from XBee modules.
         """
         self.port = port    # Serial port to use
         self.baudrate = baudrate     # Communication speed  
