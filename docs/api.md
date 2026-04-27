@@ -60,7 +60,7 @@ In this example, the `port` and `baudrate` are passed in as parameters. `pan_id`
 > ```py
 > open()
 >```
-Open a connection over the serial port. This method does not return anything if a port is successfully opened.
+Open a connection over the serial port to communicate with an XBee device.
 
 <br>
 
