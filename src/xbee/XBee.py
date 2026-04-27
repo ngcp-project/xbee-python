@@ -57,7 +57,7 @@ class XBee(ISerial):
         """Opens the serial port.
 
         Returns:
-          True if success, False if failure (There is already an open port, close the port before opening another one).
+          True if success, False if failure (If there is already an open port, close the port before opening another one).
         Raises:
           SerialException if there is an error opening the serial port
         """
@@ -112,6 +112,8 @@ class XBee(ISerial):
 
         Returns:
           True if success, False if failure (Error or port already closed).
+        Raises:
+          SerialException if there is an error closing the serial port
         """
         if self.ser is not None:
 
@@ -130,14 +132,16 @@ class XBee(ISerial):
         self.logger.write("Serial port is already closed.")
         return False
 
-    def transmit_data(self, data: str, address: str = "0000000000000000", retrieveStatus: bool = False) -> x89 | bool:
+    def transmit_data(self, data: str, address: str = "0000000000000000", retrieveStatus: bool = False) -> x89:
         """Transmit data.
         Args:
           data: String data to transmit.
           address: Address of destination XBee module. "0000000000000000" if no value is provided.
 
         Returns:
-          True if success, False if failure.
+          Status of transmit request or None
+        Raises:
+          SerialException if the serial port is not open
         """
 
         # Check if a serial port is open

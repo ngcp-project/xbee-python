@@ -94,25 +94,25 @@ Close a connection over the serial port.
 <br>
 
 > ```py
-> transmit_data(data, address="0000000000000000")
+> transmit_data(data, address="0000000000000000", retrieveStatus: bool=False) -> x89
 > ```
 
 Send data to another XBee module(s)
 
 <br>
 
-| <!-- --> | <!-- --> |
-| - | - |
-| **Parameters** | <ul><li>**data** (`str`) -  String data to transmit.</li><li>**address** (`str`) - Address of destination XBee module. `"0000000000000000"` if no value is provided.</li></ul> |
-| **Returns** | Status of transmit request. See [0x89 Tx (Transmit) Status][transmit_status] for more details. |
+| <!-- -->        | <!-- --> |
+| --------------- | -------- |
+| **Parameters**  | <ul><li>**data** (`str`) -  String data to transmit.</li><li>**address** (`str`) - Address of destination XBee module. `"0000000000000000"` if no value is provided.</li></ul> |
+| **Returns**     | Status of transmit request or `None`.  |
 | **Return type** | `x89` or `None` |
-| **Raises** | `SerialException` if serial port is not open | 
+| **Raises**      | `SerialException` if serial port is not open | 
 
-*data* can be at most 100 bytes (100 characters)
+**data** can be at most 100 bytes (100 characters)
 
-*address* can be set to `000000000000FFFF` in order to broadcast a message
+**address** can be set to `000000000000FFFF` in order to broadcast a message
 
-0x89: (frame_type, frame_id, status)
+The `x89` class has the following attributes: `frame_type`, `frame_id`, and `status`.
 
 Returns `None` if no status frame is received
 
