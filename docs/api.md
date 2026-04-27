@@ -13,16 +13,19 @@ Configure the serial port
 
 <br>
 
-| <!-- --> | <!-- --> |
-| - | - |
-| **Parameters** | 
-<ul>
-  <li><strong>port</strong> (<code>str</code> or <code>None</code>) - Port of serial device.</li>
-  <li><strong>baudrate</strong> (<code>int</code>) - Baudrate of serial device.</li>
-  <li><strong>status</strong> (<code>bool</code>) - Automatically receive status packets after a transmission.</li>
-  <li><strong>logger</strong> (<code>Logger</code>) - Logger object from Logger.Logger used to record data such as sent and received data.</li>
-</ul>
-|
+<table>
+  <tr>
+    <td><strong>Parameters</strong></td>
+    <td>
+      <ul>
+        <li><strong>port</strong> (<code>str</code> or <code>None</code>) - Port of serial device.</li>
+        <li><strong>baudrate</strong> (<code>int</code>) - Baudrate of serial device.</li>
+        <li><strong>status</strong> (<code>bool</code>) - Automatically receive status packets after a transmission.</li>
+        <li><strong>logger</strong> (<code>Logger</code>) - Logger object from <code>Logger.Logger</code> used to record data such as sent and received data.</li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
 <br>
 
