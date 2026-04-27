@@ -21,7 +21,10 @@ Configure the serial port
         <li><strong>port</strong> (<code>str</code> or <code>None</code>) - Port of serial device.</li>
         <li><strong>baudrate</strong> (<code>int</code>) - Baudrate of serial device.</li>
         <li><strong>status</strong> (<code>bool</code>) - Automatically receive status packets after a transmission.</li>
-        <li><strong>logger</strong> (<code>Logger</code>) - Logger object from <code>Logger.Logger</code> used to record data such as sent and received data.</li>
+        <li><strong>pan_id</strong> (<code>int</code>) - See below</li>
+        <li><strong>mac_address</strong> (<code>str</code>) - See below</li>
+        <li><strong>logger</strong> (<code>Logger</code> or <code>None</code>) - Logger object from <a href="https://github.com/ngcp-project/logger"><code>Logger</code></a> module used to generate log files.</li>
+        <li><strong>config_file</strong> (<code>str</code> or <code>None</code>)</li>
       </ul>
     </td>
   </tr>
@@ -33,7 +36,8 @@ See [Serial Port][serial_port] for details on finding the correct serial port na
 
 *baudrate* should be the same for both device (XBee RF module) and serial port. XBees will be configured to 115200 by default.
 
-See [Frame Details][transmit_status] for details regarding the XBee status packet (Frame type `0x89`).
+`pan_id` and `mac_address` are not used within the `XBee` module. These parameters are provided to support the `XBeeEmulator` module. See [XbeeEmulator Docs]() for more info.
+<!-- TODO: UPDATE XBEE EMULATOR DOCS -->
 
 A `Logger` instance will be created if it is not provided. You should only create your own instance of `Logger` if you want to log data that is not already logged by the XBee library.
 
