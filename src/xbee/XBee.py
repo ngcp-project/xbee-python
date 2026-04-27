@@ -295,10 +295,11 @@ class XBee(ISerial):
 
     def retrieve_data(self) -> x81 | x90:
         """
-        Retrieves one frame of data (0x81 - Rx Packet)
+        Checks for incoming data by retrieving one "receive packet" frame (0x81 or 0x90)
 
         Returns:
         - 0x81: (frame_type, source_address, rssi, options, data)
+        - 0x90: (frame_type, address_64, address_16, receive_options, received_data)
         - None: If there is no data.
         """
 

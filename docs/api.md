@@ -123,17 +123,21 @@ Returns `None` if no status frame is received
 > ```
 
 
-Check for incomming data
+Checks for incoming data by retrieving one "receive packet" frame
 
 <br>
 
 | <!-- --> | <!-- --> |
 | - | - |
-| **Returns** | `str` if there is incomming data. `None` otherwise.
-| **Return type** | `0x81` or `None`
+| **Returns** | `x81` or `x90` objects if there is incomming data. `None` otherwise.
+| **Return type** | `x81`, `x90` or `None`
 <!-- | **Raises** | `SerialException` if serial port is not open |  -->
 
-0x81: (frame_type, source_address, rssi, options, data)
+Different models of XBee devices may return different receive packet frames.
+
+The `x81` class has the following attributes: `frame_type`, `source_address`, `rssi`, `options`, `data`.
+
+The `x90` class has the following attributes: `frame_type`, `address_64`, `address_16`, `receive_options`, `received_data`
 
 <br>
 
