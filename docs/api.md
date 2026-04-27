@@ -64,10 +64,11 @@ Open a connection over the serial port to communicate with an XBee device.
 
 <br>
 
-| <!-- --> | <!-- --> |
-| - | - |
-| **Returns** | `True` if success, `False` if failure (There is already an open port) |
-| **Raises:** | `SerialException` if there is an error opening the serial port. |
+| <!-- -->        | <!-- --> |
+|-----------------|----------|
+| **Returns**     | `True` if success, `False` if failure (there is already an open port) |
+| **Return Type** | `bool` |
+| **Raises**      | `SerialException` if there is an error opening the serial port. |
 
 <br>
 
@@ -84,10 +85,11 @@ Close a connection over the serial port.
 
 <br>
 
-| <!-- --> | <!-- --> |
-| - | - |
-| **Returns** | `True` if success, `False` if failure. |
+| <!-- -->        | <!-- --> |
+| --------------- | -------- |
+| **Returns**     | `True` if success, `False` if failure. |
 | **Return type** | `bool` | 
+| **Raises**      | `SerialException` if there is an error closing the serial port. |
 
 <br>
 
