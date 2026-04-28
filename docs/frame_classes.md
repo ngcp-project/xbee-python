@@ -67,7 +67,7 @@ class x89(frame_type, frame_id, status)
     <td><strong>Parameters</strong></td>
     <td>
       <ul>
-        <li><strong>frame_type</strong> (<code>TODO</code>) - 0x90</li>
+        <li><strong>frame_type</strong> (<code>TODO</code>) - 0x89</li>
         <li><strong>frame_id</strong> (<code>TODO</code>) - </li>
         <li><strong>status</strong> (<code>TODO</code>) - </li>
       </ul>
@@ -92,7 +92,7 @@ class x88(frame_type, frame_id, at_command, status, data)
     <td><strong>Parameters</strong></td>
     <td>
       <ul>
-        <li><strong>frame_type</strong> (<code>TODO</code>) - 0x90</li>
+        <li><strong>frame_type</strong> (<code>TODO</code>) - 0x88</li>
         <li><strong>frame_id</strong> (<code>TODO</code>) - </li>
         <li><strong>at_command</strong> (<code>TODO</code>) - </li>
         <li><strong>status</strong> (<code>TODO</code>) - </li>
