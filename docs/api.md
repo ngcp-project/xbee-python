@@ -38,7 +38,7 @@ See [Serial Port][serial_port] for details on finding the correct serial port na
 
 **baudrate** should be the same for both device (XBee RF module) and serial port. XBees will be configured to 115200 by default.
 
-`pan_id` and `mac_address` are not used within the `XBee` module. These parameters are provided to support the `XBeeEmulator` module. See the [Xbee Emulator]() documentation for more info.
+`pan_id` and `mac_address` are not used within the `XBee` module. These parameters are provided to support the `XBeeEmulator` module. See the [Xbee Emulator](./xbee_emulator) documentation for more info.
 <!-- TODO: UPDATE XBEE EMULATOR DOCS -->
 
 A `Logger` instance will be created if it is not provided. You should only create your own instance of `Logger` if you want to log data that is not already logged by the XBee library.
@@ -107,7 +107,7 @@ Send data to another XBee module(s)
 | --------------- | -------- |
 | **Parameters**  | <ul><li>**data** (`str`) -  String data to transmit.</li><li>**address** (`str`) - Address of destination XBee module. `"0000000000000000"` if no value is provided.</li></ul> |
 | **Returns**     | Status of transmit request or `None`.  |
-| **Return type** | `x89` or `None` |
+| **Return type** | [`x89`][transmit_status] or `None` |
 | **Raises**      | `SerialException` if serial port is not open | 
 
 **data** can be at most 100 bytes (100 characters)
@@ -156,7 +156,7 @@ Request and retrieve configuration detail of XBee device.
 | <!-- --> | <!-- --> |
 | - | - |
 | **Parameters** | **id** (`str`) - Identifier of AT command |
-| **Returns** | AT command response. See [0x88 AT Command Response][at_command_response] for more details. |
+| **Returns** | AT command response. |
 | **Return type** | `0x88`|
 | **Raises** | `SerialException` if serial port is not open | 
 
@@ -176,10 +176,13 @@ This method reads a config file and executes AT commands to retrieve configurati
 <!-- | **Returns** | AT command response. See [0x88 AT Command Response][at_command_response] for more details. |
 | **Return type** | `0x88`| -->
 
+## Additional Resources
+- Please refer to the [frame class](./frame_classes.md) page for frame objects returned by the XBee library.
+
 
 <!-- Links -->
 [at_command_list]: ../AT_Command_List.txt
-[at_command_response]: ./frame_details.md#0x88---at-command-response
+[at_command_response]: ./frame_classes.md#class-xbeeframesx88
 [frame_details]: ./frame_details.md
 [serial_port]: ./serial_port.md
-[transmit_status]: ./frame_details.md#xbee-transmit-statusapi-mode---frame-type-89
+[transmit_status]: ./frame_classes.md#class-xbeeframesx89
