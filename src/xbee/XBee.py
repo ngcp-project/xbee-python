@@ -18,7 +18,10 @@ class XBee(ISerial):
           port: Port of serial device.
           baudrate: Baudrate of serial device (/port)
           status: Automatically receive status packets after a transmission.
+          pan_id: Not used. Included to provide support for XbeeEmulator
+          mac_address Not used. Included to provide support for XbeeEmulator
           logger: Logger instance
+          config_file: Filename of file that contains configuration details to read from XBee modules.
         """
         self.port = port    # Serial port to use
         self.baudrate = baudrate     # Communication speed  
@@ -54,7 +57,7 @@ class XBee(ISerial):
         """Opens the serial port.
 
         Returns:
-          True if success, False if failure (There is already an open port, close the port before opening another one).
+          True if success, False if failure (If there is already an open port, close the port before opening another one).
         Raises:
           SerialException if there is an error opening the serial port
         """
@@ -109,6 +112,8 @@ class XBee(ISerial):
 
         Returns:
           True if success, False if failure (Error or port already closed).
+        Raises:
+          SerialException if there is an error closing the serial port
         """
         if self.ser is not None:
 
@@ -127,14 +132,16 @@ class XBee(ISerial):
         self.logger.write("Serial port is already closed.")
         return False
 
-    def transmit_data(self, data: str, address: str = "0000000000000000", retrieveStatus: bool = False) -> x89 | bool:
+    def transmit_data(self, data: str, address: str = "0000000000000000", retrieveStatus: bool = False) -> x89:
         """Transmit data.
         Args:
           data: String data to transmit.
           address: Address of destination XBee module. "0000000000000000" if no value is provided.
 
         Returns:
-          True if success, False if failure.
+          Status of transmit request or None
+        Raises:
+          SerialException if the serial port is not open
         """
 
         # Check if a serial port is open
@@ -288,10 +295,11 @@ class XBee(ISerial):
 
     def retrieve_data(self) -> x81 | x90:
         """
-        Retrieves one frame of data (0x81 - Rx Packet)
+        Checks for incoming data by retrieving one "receive packet" frame (0x81 or 0x90)
 
         Returns:
         - 0x81: (frame_type, source_address, rssi, options, data)
+        - 0x90: (frame_type, address_64, address_16, receive_options, received_data)
         - None: If there is no data.
         """
 

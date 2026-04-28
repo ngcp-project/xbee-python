@@ -1,8 +1,5 @@
 # XBee Serial Library
 
-> [!Warning]
-> Some documentation in this repository may be outdated.
-
 This library allows for the communication between a computer and a XBee RF module over the serial port. 
 
 ## Requirements
@@ -27,7 +24,7 @@ Install dependencies
 pip install -e /path/to/xbee-python
 ```
 
-See the [XBee Serial API][api] page for method details.
+See the [XBee Serial API][api] page for API documentation.
 
 See the [Xbee Emulator][xbee_emulator] page if you would like to use the `XBeeEmulator` module.
 
